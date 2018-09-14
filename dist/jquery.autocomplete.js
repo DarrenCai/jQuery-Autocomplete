@@ -516,6 +516,12 @@
             data = {
                 suggestions: $.grep(options.lookup, function (suggestion) {
                     return filter(suggestion, query, queryLowerCase);
+                }).sort(function (a, b) {
+                    if (a.value.toLowerCase() === query.toLowerCase())
+                        return b.value.toLowerCase() === query.toLowerCase() ? 0 : -1;
+                    if (b.value.toLowerCase() === query.toLowerCase())
+                        return 1;
+                    return 0;
                 })
             };
 
